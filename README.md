@@ -1,4 +1,4 @@
-# Biased-Dice
+ # Biased-Dice
 
 Biased-Dice is a Python program that simulates a dice roll with a graphical user interface (GUI) built using Tkinter. It includes features like saving outputs in a text file and the option to set one value of the dice to be biased with a 1/2 probability.
 
@@ -6,6 +6,7 @@ Biased-Dice is a Python program that simulates a dice roll with a graphical user
 
 - Simulates a dice roll with customizable bias.
 - Graphical user interface (GUI) built with Tkinter for easy interaction.
+- 
 - Saves outputs to a text file for future reference.
 
 ## Prerequisites
