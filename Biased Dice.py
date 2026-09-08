@@ -19,6 +19,7 @@ conv = {
     6:'⚅',
 }
 
+
 def fetch():
     with open('Save.txt','r') as saved:
         strr = saved.readlines()
@@ -80,6 +81,7 @@ root.configure(bg="#ADDDB5")
 root.title("Besharam Dice")
 root.geometry("400x400")
 # root.wm_iconbitmap("i.ico")
+#log(n)
 root.minsize(400,400)
 root.maxsize(400,400)
 root.mainloop()
