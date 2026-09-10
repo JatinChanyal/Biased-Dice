@@ -1,39 +1,84 @@
- # Biased-Dice
+import random
+import tkinter as tk
+import tkinter.messagebox as tkm
 
-Biased-Dice is a Python program that simulates a dice roll with a graphical user interface (GUI) built using Tkinter. It includes features like saving outputs in a text file and the option to set one value of the dice to be biased with a 1/2 probability.
+def clear():
+    tkm.showinfo(title="History", message= "Freed File")
+        
+    with open("Save.txt", 'w') as clear:
+        clear.write("")
+    clear.close()
 
-## Features
+conv = {
+    1:'⚀',
+    2:'⚁',
+    3:'⚂',
+    4:'⚃',
+    5:'⚄',
+    6:'⚅',
+}
 
-- Simulates a dice roll with customizable bias.
-- Graphical user interface (GUI) built with Tkinter for easy interaction.
-- 
-- Saves outputs to a text file for future reference.
+def fetch():
+    with open('Save.txt','r') as saved:
+        strr = saved.readlines()
+        msg=strr[-1:-6:-1]
 
-## Prerequisites
+        l = 20
+        for i in msg:
+            tk.Label(text= str(conv[int(i[0])]), font= 'arial 65', fg='#149776', bg='#ADDDB5').place(x=l,y=270)
+            l += 70
 
-Before running the program on your computer, ensure you have the following libraries installed:
+def dice():
+    possibilities = [1,2,3,4,5,6]
+    if chBias.get() == 1:
+        for i in range(4):
+            possibilities.append(got.get())
+        a = random.choice(possibilities)
+        possibilities = [1,2,3,4,5,6]
+        
+    else:
+        a = random.choice(possibilities)
+  
+    tk.Label(text=f"{conv[a]}", font= 'arial 65', fg='#149776', bg='#ADDDB5').place(x=150,y=120)
 
-1. Tkinter
+    with open("Save.txt",'a') as saver:
+        saver.write(str(a)+'\n')
+    saver.close()
 
-## Usage
+root = tk.Tk()
 
-1. Clone the repository to your local machine.
-2. Run the Python script `biased_dice.py`.
-3. Use the GUI to set bias and roll the dice.
-4. Optionally, save the outputs to a text file for future reference.
+chBias = tk.IntVar()
 
-## How to Set Bias
+bais = tk.Checkbutton(text="Biased Dice",variable= chBias,bg= '#ADDDB5',font='15').place(x=130,y=5)
+got = tk.IntVar()
 
-To set bias for a specific value (e.g., 6), follow these steps:
+tk.Label(text="Choose Biased Value: ",bg= '#ADDDB5',font='15').place(x=100,y=40)
 
-1. Select the value from the dropdown menu.
-2. Choose the desired bias: "Fair" for unbiased or "Biased" for a 1/2 probability.
-3. Click the "Set Bias" button to apply the changes.
+tk.Radiobutton(root, text='1',variable=got, value=1,fg='#149776',bg='#ADDDB5',font='10').place(x=45,y=70)
+tk.Radiobutton(root, text='2',variable=got, value=2,fg='#149776',bg='#ADDDB5',font='10').place(x=95,y=70)
+tk.Radiobutton(root, text='3',variable=got, value=3,fg='#149776',bg='#ADDDB5',font='10').place(x=145,y=70)
+tk.Radiobutton(root, text='4',variable=got, value=4,fg='#149776',bg='#ADDDB5',font='10').place(x=195,y=70)
+tk.Radiobutton(root, text='5',variable=got, value=5,fg='#149776',bg='#ADDDB5',font='10').place(x=245,y=70)
+tk.Radiobutton(root, text='6',variable=got, value=6,fg='#149776',bg='#ADDDB5',font='10').place(x=295,y=70)
 
-## Contributing
+mainMenu = tk.Menu(root,tearoff=0, bg='#149776', fg='#ADDDB5')
+check = tk.Menu(mainMenu,tearoff=0,bg='#ADDDB5', fg='#107359')
+check.add_command(label="Previous Datas",command=fetch)
+check.add_command(label="Free Data", command= clear)
+check.add_command(label="Exit", command= quit)
+mainMenu.add_cascade(label="Menu",menu= check)
 
-Contributions are welcome! If you have any ideas for improvements, new features, or bug fixes, feel free to open an issue or submit a pull request.
+root.config(menu=mainMenu)
 
-## License
+tk.Button(text="Generate Result", fg='white',bg='#149776', font='10',command=dice).place(x=110,y=225)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+sbar = tk.Label(root, text="You Have 50% Chance to get biased choice", relief='sunken', anchor="w",bg="#149776",fg='white')
+sbar.pack(side='bottom', fill='x')
+
+root.configure(bg="#ADDDB5")
+root.title("Besharam Dice")
+root.geometry("400x400")
+# root.wm_iconbitmap("i.ico")
+root.minsize(400,400)
+root.maxsize(400,400)
+root.mainloop()
