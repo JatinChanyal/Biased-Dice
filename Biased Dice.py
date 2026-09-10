@@ -2,7 +2,6 @@ import random
 import tkinter as tk
 import tkinter.messagebox as tkm
 
-
 def clear():
     tkm.showinfo(title="History", message= "Freed File")
         
@@ -18,7 +17,6 @@ conv = {
     5:'⚄',
     6:'⚅',
 }
-
 
 def fetch():
     with open('Save.txt','r') as saved:
@@ -81,7 +79,6 @@ root.configure(bg="#ADDDB5")
 root.title("Besharam Dice")
 root.geometry("400x400")
 # root.wm_iconbitmap("i.ico")
-#log(n)
 root.minsize(400,400)
 root.maxsize(400,400)
 root.mainloop()
